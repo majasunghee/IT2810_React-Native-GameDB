@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_USER": "gruppe40",
+        "MONGO_PASSWORD": "nintendo",
+        "MONGO_DB": "gamesdb"
+    }
+}
