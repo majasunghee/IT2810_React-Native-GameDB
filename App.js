@@ -4,39 +4,22 @@ import React, { useState, useEffect, useRef } from "react";
 
 
 
-export default function App(props) {
+export default function App() {
 
     const [games, setGames] = useState([]);
     const [search, setSearch] = useState("");
   
-    const [skip, setSkip] = useState(1);
   
-    const [show, setShow] = useState(false);
-    const [details, setDetails] = useState();
-    const [index, setIndex] = useState();
-  
-    if (props.search !== search) {
-      setSearch(props.search);
-    }
-  
-    const handleClick = (index) => {
-      setIndex(index);
-      setDetails(games[index]);
-      setShow(true);
-    };
-  
-    //update fetchEvents when search updates
     useEffect(() => {
       fetchEvents();
     }, []);
   
-    //fetch from db. Skip defines whitch pagenumber the user are currently viewing
+  
     const fetchEvents = () => {
-      console.log("search: ", search);
       let requestBody = {
         query: `
                     query {
-                        games(name: "zelda", skip: 1) {
+                        games(name: "${search}", skip: 1) {
                         _id
                         name
                         platform                        
@@ -66,11 +49,9 @@ export default function App(props) {
             throw new Error("Failed!");
           }
           const data = res.json();
-          console.log(data);
           return data;
         })
         .then((resData) => {
-          // set fetched data to state "games"
           const games = resData.data.games;
           setGames(games);
         })
@@ -78,8 +59,6 @@ export default function App(props) {
           console.log(err);
         });
     };
-
-    console.log(games);
 
 
 
@@ -95,7 +74,6 @@ export default function App(props) {
         </View>
     
     <View>
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>
     </React.Fragment>
