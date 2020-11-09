@@ -47,13 +47,7 @@ const gameSchema = new Schema({
     officialsite: {
         type: String,
         required: false
-    },
-    creator: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
     }
 }); 
 
-//game for the test db
-//consolegames for the real db
 module.exports = mongoose.model("consolegames", gameSchema);

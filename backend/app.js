@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 
 const graphqlSchema = require('./graphql/schema/schema');
 const graphqlResolver = require('./graphql/resolvers/index');
-const isAuth = require('./middleware/is-auth')
 
 const app = express();
 
@@ -22,7 +21,6 @@ app.use((req, res, next) => {
     next();
 });
 
-//app.use(isAuth);
 
 app.use(
     '/graphql', 
