@@ -1,2 +1,0 @@
-# prosjekt4
-
