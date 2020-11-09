@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(isAuth);
+//app.use(isAuth);
 
 app.use(
     '/graphql', 
@@ -34,9 +34,7 @@ app.use(
 );
 
 mongoose.connect(
-    `mongodb://${process.env.MONGO_USER}:${
-        process.env.MONGO_PASSWORD
-    }@it2810-40.idi.ntnu.no:27017/${process.env.MONGO_DB}?auth=admin`,
+    `mongodb://gruppe40:nintendo@it2810-40.idi.ntnu.no:27017/gamesdb?auth=admin`,
     {useNewUrlParser: true, useUnifiedTopology: true}
     ).then(() => {
         app.listen(3000);
