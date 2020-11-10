@@ -17,7 +17,7 @@ module.exports = buildSchema(
             officialsite: String!
        }
         type RootQuery {
-            games(name: String!): [Game!]!
+            games(name: String!, skip: Int!): [Game!]!
         }
 
         schema {
