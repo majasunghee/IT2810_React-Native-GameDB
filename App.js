@@ -9,6 +9,8 @@ export default function App() {
     const [games, setGames] = useState([]);
     const [search, setSearch] = useState("");
   
+    let total_results = games.length;
+    console.log(total_results);
   
     useEffect(() => {
       fetchEvents();
@@ -19,7 +21,7 @@ export default function App() {
       let requestBody = {
         query: `
                     query {
-                        games(name: "${search}", skip: 1) {
+                        games(name: "${search}") {
                         _id
                         name
                         platform                        
