@@ -7,6 +7,8 @@ module.exports = {
     return Game.find({
       name: { $regex: ".*" + args.name + ".*", $options: "i" },
     })
+      .skip((args.skip-1)*6)
+      .limit(6)
       .then((games) => {
         return games.map((game) => {
           return transformGame(game);

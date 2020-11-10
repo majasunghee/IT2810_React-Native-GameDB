@@ -21,7 +21,7 @@ export default function App() {
       let requestBody = {
         query: `
                     query {
-                        games(name: "${search}") {
+                        games(name: "${search}", skip: 1) {
                         _id
                         name
                         platform                        
