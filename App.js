@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import React, { useState, useEffect, useRef } from "react";
+import Pagination from './src/components/Pagination';
 
 
 
@@ -8,20 +9,25 @@ export default function App() {
 
     const [games, setGames] = useState([]);
     const [search, setSearch] = useState("");
+    const [pageNum, setPageNum] = useState(1);
+
+    //let nextPage = (pageNum+1);
+
+    const pageResults = games.length;  
   
-    let total_results = games.length;
-    console.log(total_results);
+    //let total_results = games.length;
+    //console.log("Number of results" + total_results);
+   // console.log("this is page:" + pageNum);
   
     useEffect(() => {
       fetchEvents();
-    }, []);
-  
+     }, [pageNum]);
   
     const fetchEvents = () => {
       let requestBody = {
         query: `
                     query {
-                        games(name: "${search}", skip: 1) {
+                        games(name: "${search}", skip: ${pageNum}) {
                         _id
                         name
                         platform                        
@@ -47,9 +53,6 @@ export default function App() {
         },
       })
         .then((res) => {
-          if (res.status !== 200 && res.status !== 201) {
-            throw new Error("Failed!");
-          }
           const data = res.json();
           return data;
         })
@@ -64,6 +67,18 @@ export default function App() {
 
 
 
+    function nextButton() {
+      if (pageResults >= 0) {
+        setPageNum(pageNum+1);
+      }
+      return pageNum;
+    }
+
+    console.log("Pageresults = " +pageResults);
+    console.log("pageNum" + pageNum);
+
+
+//        <Button type="button" onPress={() => handleClick()}>This works in the return statement of app.js</Button>
 
   return (
     <React.Fragment>
@@ -74,7 +89,7 @@ export default function App() {
               );
             })}
         </View>
-    
+        <Pagination pageNum={pageNum} onPress={() => nextButton()}/>
     <View>
       <StatusBar style="auto" />
     </View>
