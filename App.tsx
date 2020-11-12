@@ -4,20 +4,32 @@ import { StyleSheet, View } from "react-native";
 import React, { useState, useEffect } from "react";
 //import SearchBar from "./src/components/SearchBar";
 import NavBar from "./src/components/Navbar";
+import Pagination from './src/components/Pagination';
 
 export default function App() {
+
+  
+
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
 
+ 
+
+  const [pageNum, setPageNum] = useState(1);
+
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
+  const pageResults = games.length;  
+
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [pageNum]);
 
   const fetchEvents = () => {
     let requestBody = {
       query: `
                     query {
-                        games(name: "${search}", skip: 1) {
+                        games(name: "${search}", skip: ${pageNum}) {
                         _id
                         name
                         platform                        
@@ -58,6 +70,33 @@ export default function App() {
       });
   };
 
+    //Previous button is clickable  except when on the fist page number
+    //The next button is clickable as long as there are game elements in pageResults
+    function nextButton() {
+      if (pageNum >= 1) {
+        setPrevBtnDisabled(false);
+        if (pageResults < 12) {
+          setNextBtnDisabled(true);
+        }
+      }
+      setPageNum(pageNum+1);
+    }
+
+    //Previous button is disabled if on the first page
+    //Next button is enabled 
+    function prevButton() {
+      if (pageNum <= 2) {
+        setPrevBtnDisabled(true);
+      }
+      setNextBtnDisabled(false);
+      setPageNum(pageNum-1);
+    }
+
+console.log(pageNum);
+   // console.log("Pageresults = " +pageResults);
+   // console.log("pageNum" + pageNum);
+
+
   return (
     <Container>
       <StatusBar style="auto" />
@@ -65,14 +104,20 @@ export default function App() {
       <Content>
         
         <List>
-        {games.map(game => {
+        {games.slice(0,6).map(game => {
           return <ListItem>
             <Text>{game.name}{"\n"}{game.msrp}{"\n"}By: {game.developer}</Text>
             </ListItem>;
         })}
         </List>
-      </Content>         
-      
+      </Content>     
+      <Pagination 
+          pageNum={pageNum} 
+          nextButton={() => nextButton()} 
+          prevButton={() => prevButton()}
+          prevBtnDisabled={prevBtnDisabled}
+          nextBtnDisabled={nextBtnDisabled}
+        />    
     </Container>
   );
 
