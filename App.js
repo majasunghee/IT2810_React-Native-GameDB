@@ -11,11 +11,14 @@ export default function App() {
     const [search, setSearch] = useState("");
     const [pageNum, setPageNum] = useState(1);
 
-    //let nextPage = (pageNum+1);
+    
+    const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+    const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
+    const [displayIsEmpty, setDisplayIsEmpty] = useState(false);
+
 
     const pageResults = games.length;  
   
-    //let total_results = games.length;
     //console.log("Number of results" + total_results);
    // console.log("this is page:" + pageNum);
   
@@ -65,20 +68,32 @@ export default function App() {
         });
     };
 
-
-
     function nextButton() {
       if (pageResults >= 0) {
-        setPageNum(pageNum+1);
+        setPrevBtnDisabled(false);
       }
-      return pageNum;
+      setPageNum(pageNum+1);
     }
+
+    function prevButton() {
+      if (pageResults <= 1) {
+        setPrevBtnDisabled(true);
+      }
+      setPageNum(pageNum-1);
+    }
+
+    function DisplayEmpty() {
+      setNextBtnDisabled(true);
+      setDisplayIsEmpty(true);
+    };
+
+    function DisplayNotEmpty() {
+      setNextBtnDisabled(false);
+      setDisplayIsEmpty(false);
+    };
 
     console.log("Pageresults = " +pageResults);
     console.log("pageNum" + pageNum);
-
-
-//        <Button type="button" onPress={() => handleClick()}>This works in the return statement of app.js</Button>
 
   return (
     <React.Fragment>
@@ -89,19 +104,15 @@ export default function App() {
               );
             })}
         </View>
-        <Pagination pageNum={pageNum} onPress={() => nextButton()}/>
+        <Pagination 
+          pageNum={pageNum} 
+          nextButton={() => nextButton()} 
+          prevButton={() => prevButton()}
+          prevBtnDisabled={prevBtnDisabled}
+        />
     <View>
       <StatusBar style="auto" />
     </View>
     </React.Fragment>
   );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 }
