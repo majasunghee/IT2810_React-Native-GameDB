@@ -2,20 +2,32 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
+import Pagination from './src/components/Pagination';
 
 export default function App() {
+
+  
+
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
 
+ 
+
+  const [pageNum, setPageNum] = useState(1);
+
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
+  const pageResults = games.length;  
+
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [pageNum]);
 
   const fetchEvents = () => {
     let requestBody = {
       query: `
                     query {
-                        games(name: "${search}", skip: 1) {
+                        games(name: "${search}", skip: ${pageNum}) {
                         _id
                         name
                         platform                        
@@ -56,14 +68,49 @@ export default function App() {
       });
   };
 
+    //Previous button is clickable  except when on the fist page number
+    //The next button is clickable as long as there are game elements in pageResults
+    function nextButton() {
+      if (pageNum >= 1) {
+        setPrevBtnDisabled(false);
+        if (pageResults < 12) {
+          setNextBtnDisabled(true);
+        }
+      }
+      setPageNum(pageNum+1);
+    }
+
+    //Previous button is disabled if on the first page
+    //Next button is enabled 
+    function prevButton() {
+      if (pageNum <= 2) {
+        setPrevBtnDisabled(true);
+      }
+      setNextBtnDisabled(false);
+      setPageNum(pageNum-1);
+    }
+
+console.log(pageNum);
+   // console.log("Pageresults = " +pageResults);
+   // console.log("pageNum" + pageNum);
+
+
   return (
     <React.Fragment>
       <NavBar></NavBar>
       <View>
-        {games.map((game, index) => {
+        {games.slice(0,6).map((game, index) => {
           return <Text>{game.name}</Text>;
         })}
       </View>
+      
+      <Pagination 
+          pageNum={pageNum} 
+          nextButton={() => nextButton()} 
+          prevButton={() => prevButton()}
+          prevBtnDisabled={prevBtnDisabled}
+          nextBtnDisabled={nextBtnDisabled}
+        />
 
       <View>
         <StatusBar style="auto" />

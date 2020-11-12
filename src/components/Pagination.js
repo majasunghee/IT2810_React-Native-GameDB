@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 TouchableOpacity.defaultProps = { activeOpacity: 0.5 };
 
 const Pagination = ({ nextButton, prevButton, prevBtnDisabled, nextBtnDisabled }) => {
-    console.log(nextBtnDisabled);
     return (
         <View
             style={styles.buttonContainer}
