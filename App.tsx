@@ -1,17 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import React, { useState, useEffect, useRef } from "react";
+import { Text, Container, Content , List, ListItem, Title} from 'native-base';
+import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+//import SearchBar from "./src/components/SearchBar";
 import NavBar from "./src/components/Navbar";
 import Pagination from './src/components/Pagination';
 
 export default function App() {
 
-  
-
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
-
- 
 
   const [pageNum, setPageNum] = useState(1);
 
@@ -90,40 +88,59 @@ export default function App() {
       setPageNum(pageNum-1);
     }
 
-console.log(pageNum);
+    console.log(pageNum);
    // console.log("Pageresults = " +pageResults);
    // console.log("pageNum" + pageNum);
-
+  const styles = StyleSheet.create({
+    listItem: {
+      backgroundColor: "white",
+      elevation: 5,
+      margin: 6, 
+      padding: 5 },
+    titleText: {
+      fontWeight: 'bold', 
+      fontSize: 20, 
+      textTransform: 'uppercase'
+    }
+  });
 
   return (
-    <React.Fragment>
-      <NavBar></NavBar>
-      <View>
-        {games.slice(0,6).map((game, index) => {
-          return <Text>{game.name}</Text>;
+    <Container>
+      <StatusBar style="auto" />
+      <NavBar/>
+      <Content>        
+        <List style={{backgroundColor: "#DBDADA"}}>
+        {games.slice(0,6).map(game => {
+          return (
+          <ListItem noIndent style={styles.listItem}>
+            <Text style={{lineHeight: 26}}>
+              <Text style={styles.titleText}>
+                {game.name}
+              </Text>
+              {"\n"}
+              <Text style={{fontWeight: 'bold'}}>
+              Price: 
+              </Text>
+              {' '+game.msrp}
+              {"\n"}
+              <Text style={{fontWeight: 'bold'}}>
+              By: 
+              </Text>
+              {' '+game.developer}
+            </Text>
+          </ListItem>)
         })}
-      </View>
-      
+        </List>
+      </Content>     
       <Pagination 
           pageNum={pageNum} 
           nextButton={() => nextButton()} 
           prevButton={() => prevButton()}
           prevBtnDisabled={prevBtnDisabled}
           nextBtnDisabled={nextBtnDisabled}
-        />
-
-      <View>
-        <StatusBar style="auto" />
-      </View>
-    </React.Fragment>
+        />    
+    </Container>
   );
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  });
+
 }

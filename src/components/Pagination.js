@@ -1,25 +1,28 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Button, Icon, Title, Text} from 'native-base';
+import {StyleSheet, View } from 'react-native';
 
-TouchableOpacity.defaultProps = { activeOpacity: 0.5 };
+//TouchableOpacity.defaultProps = { activeOpacity: 0.5 };
 
 const Pagination = ({ nextButton, prevButton, prevBtnDisabled, nextBtnDisabled }) => {
     return (
         <View
             style={styles.buttonContainer}
         >   
-            <TouchableOpacity
+            <Button  info iconLeft block style={styles.button}
                 disabled={prevBtnDisabled}
-                onPress={prevButton} style={[styles.appButton]}>
-                <Text style={styles.appButtonText}>Prev</Text>
-            </TouchableOpacity>
+                onPress={prevButton} >
+                
+                <Icon name="ios-arrow-back"/>
+                <Text>   Previous </Text> 
+            </Button>
 
-            <TouchableOpacity 
+            <Button  info iconRight block style={styles.button}
                 disabled={nextBtnDisabled}
-                onPress={nextButton} style={[styles.appButton]}>
-                <Text style={styles.appButtonText}>Next</Text>
-            </TouchableOpacity>
+                onPress={nextButton} >
+                <Text>Next  </Text> 
+                <Icon name="ios-arrow-forward"/> 
+            </Button>
         </View>        
     )
 }
@@ -30,21 +33,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
-    appButton: {
-        elevation: 8,
-        backgroundColor: "#FF0000",
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 12,
-        width: 200
-    
-    },
-    appButtonText: {
-        fontSize: 16,
-        color: "#fff",
-        fontWeight: "bold",
-        alignSelf: "center",
-        textTransform: "uppercase"
+    button: {
+        flex:1,
+        alignItems: "center",
     }
   });
 
