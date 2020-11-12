@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, Container, Content , List, ListItem} from 'native-base';
+import { Text, Container, Content , List, ListItem, Title} from 'native-base';
 import { StyleSheet, View } from "react-native";
 import React, { useState, useEffect } from "react";
 //import SearchBar from "./src/components/SearchBar";
@@ -8,12 +8,8 @@ import Pagination from './src/components/Pagination';
 
 export default function App() {
 
-  
-
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
-
- 
 
   const [pageNum, setPageNum] = useState(1);
 
@@ -92,7 +88,7 @@ export default function App() {
       setPageNum(pageNum-1);
     }
 
-console.log(pageNum);
+    console.log(pageNum);
    // console.log("Pageresults = " +pageResults);
    // console.log("pageNum" + pageNum);
 
