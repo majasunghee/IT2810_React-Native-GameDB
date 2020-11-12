@@ -1,6 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import React, { useState, useEffect, useRef } from "react";
+import { Text, Container, Content , List, ListItem} from 'native-base';
+import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+//import SearchBar from "./src/components/SearchBar";
 import NavBar from "./src/components/Navbar";
 
 export default function App() {
@@ -57,18 +59,21 @@ export default function App() {
   };
 
   return (
-    <React.Fragment>
-      <NavBar></NavBar>
-      <View>
-        {games.map((game, index) => {
-          return <Text>{game.name}</Text>;
+    <Container>
+      <StatusBar style="auto" />
+      <NavBar/>
+      <Content>
+        
+        <List>
+        {games.map(game => {
+          return <ListItem>
+            <Text>{game.name}{"\n"}{game.msrp}{"\n"}By: {game.developer}</Text>
+            </ListItem>;
         })}
-      </View>
-
-      <View>
-        <StatusBar style="auto" />
-      </View>
-    </React.Fragment>
+        </List>
+      </Content>         
+      
+    </Container>
   );
 
   const styles = StyleSheet.create({
