@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../assets/logo.png";
 import { StyleSheet, View, Image, Text } from "react-native";
 import { Dimensions } from "react-native";
+import logo from "../assets/logo.png";
 
 let ScreenWidth = Dimensions.get("window").width;
 
