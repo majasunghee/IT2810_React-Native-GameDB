@@ -91,19 +91,44 @@ export default function App() {
     console.log(pageNum);
    // console.log("Pageresults = " +pageResults);
    // console.log("pageNum" + pageNum);
-
+  const styles = StyleSheet.create({
+    listItem: {
+      backgroundColor: "white",
+      elevation: 5,
+      margin: 6, 
+      padding: 5 },
+    titleText: {
+      fontWeight: 'bold', 
+      fontSize: 20, 
+      textTransform: 'uppercase'
+    }
+  });
 
   return (
     <Container>
       <StatusBar style="auto" />
       <NavBar/>
-      <Content>
-        
-        <List>
+      <Content>        
+        <List style={{backgroundColor: "#DBDADA"}}>
         {games.slice(0,6).map(game => {
-          return <ListItem>
-            <Text>{game.name}{"\n"}{game.msrp}{"\n"}By: {game.developer}</Text>
-            </ListItem>;
+          return (
+          <ListItem noIndent style={styles.listItem}>
+            <Text style={{lineHeight: 26}}>
+              <Text style={styles.titleText}>
+                {game.name}
+              </Text>
+              {"\n"}
+              <Text style={{fontWeight: 'bold'}}>
+              Price: 
+              </Text>
+              {' '+game.msrp}
+              {"\n"}
+              <Text style={{fontWeight: 'bold'}}>
+              By: 
+              </Text>
+              {' '+game.developer}
+            </Text>
+          </ListItem>)
         })}
         </List>
       </Content>     
@@ -117,12 +142,5 @@ export default function App() {
     </Container>
   );
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  });
+
 }
