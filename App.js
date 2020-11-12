@@ -11,16 +11,12 @@ export default function App() {
     const [search, setSearch] = useState("");
     const [pageNum, setPageNum] = useState(1);
 
-    
+
     const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
     const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
-    const [displayIsEmpty, setDisplayIsEmpty] = useState(false);
-
 
     const pageResults = games.length;  
-  
-    //console.log("Number of results" + total_results);
-   // console.log("this is page:" + pageNum);
+    
   
     useEffect(() => {
       fetchEvents();
@@ -69,36 +65,31 @@ export default function App() {
     };
 
     function nextButton() {
-      if (pageResults >= 0) {
+      if (pageNum >= 1) {
         setPrevBtnDisabled(false);
+        if (pageResults < 12) {
+          setNextBtnDisabled(true);
+        }
       }
       setPageNum(pageNum+1);
     }
 
     function prevButton() {
-      if (pageResults <= 1) {
+      if (pageNum <= 2) {
         setPrevBtnDisabled(true);
+        setNextBtnDisabled(false);
       }
       setPageNum(pageNum-1);
     }
 
-    function DisplayEmpty() {
-      setNextBtnDisabled(true);
-      setDisplayIsEmpty(true);
-    };
 
-    function DisplayNotEmpty() {
-      setNextBtnDisabled(false);
-      setDisplayIsEmpty(false);
-    };
-
-    console.log("Pageresults = " +pageResults);
-    console.log("pageNum" + pageNum);
+   // console.log("Pageresults = " +pageResults);
+   // console.log("pageNum" + pageNum);
 
   return (
     <React.Fragment>
         <View>
-            {games.map((game, index) => {
+            {games.slice(0,6).map((game, index) => {
               return (
                   <Text>{game.name}</Text>
               );
@@ -109,6 +100,7 @@ export default function App() {
           nextButton={() => nextButton()} 
           prevButton={() => prevButton()}
           prevBtnDisabled={prevBtnDisabled}
+          nextBtnDisabled={nextBtnDisabled}
         />
     <View>
       <StatusBar style="auto" />
