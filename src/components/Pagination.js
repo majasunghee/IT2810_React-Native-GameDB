@@ -5,6 +5,7 @@ import {StyleSheet, View } from 'react-native';
 //TouchableOpacity.defaultProps = { activeOpacity: 0.5 };
 
 const Pagination = ({ nextButton, prevButton, prevBtnDisabled, nextBtnDisabled }) => {
+    
     return (
         <View
             style={styles.buttonContainer}

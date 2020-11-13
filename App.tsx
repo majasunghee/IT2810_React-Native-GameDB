@@ -1,25 +1,48 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, Container, Content , List, ListItem, Title} from 'native-base';
-import { StyleSheet, View } from "react-native";
+import { Text, Container, Content , List, ListItem, Item, Icon, Input, Header} from 'native-base';
+import { StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
-//import SearchBar from "./src/components/SearchBar";
+import SearchBar from "./src/components/SearchBar";
 import NavBar from "./src/components/Navbar";
 import Pagination from './src/components/Pagination';
+ import * as Font from 'expo-font';
 
-export default function App() {
+interface IGame{
+  name: string,
+  platform: string,
+  msrp: number,
+  publisher: string,
+  developer: string,
+  esrb: string,
+  releasedate: string,
+  romfilesize: string,
+  genre: string,
+  storelink: string,
+  officialsite: string,
+}
 
-  const [games, setGames] = useState([]);
-  const [search, setSearch] = useState("");
+  const App: React.FC<IGame> = () => {
 
-  const [pageNum, setPageNum] = useState(1);
+  const [games, setGames] = useState<IGame[]>([]);
+  const [search, setSearch] = useState<string>("");
 
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
-  const pageResults = games.length;  
+  const [pageNum, setPageNum] = useState<number>(1);
+
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
+  const pageResults :number = games.length;  
+
+// native base uses fonts that need to be loaded async
+  useEffect(() => {
+    (async () => await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+    }))();
+    }, [])
 
   useEffect(() => {
     fetchEvents();
-  }, [pageNum]);
+  }, [pageNum, search]);
 
   const fetchEvents = () => {
     let requestBody = {
@@ -66,7 +89,7 @@ export default function App() {
       });
   };
 
-    //Previous button is clickable  except when on the fist page number
+  //Previous button is clickable  except when on the fist page number
     //The next button is clickable as long as there are game elements in pageResults
     function nextButton() {
       if (pageNum >= 1) {
@@ -91,6 +114,7 @@ export default function App() {
     console.log(pageNum);
    // console.log("Pageresults = " +pageResults);
    // console.log("pageNum" + pageNum);
+
   const styles = StyleSheet.create({
     listItem: {
       backgroundColor: "white",
@@ -108,11 +132,12 @@ export default function App() {
     <Container>
       <StatusBar style="auto" />
       <NavBar/>
+      <SearchBar setSearch={setSearch}/>
       <Content>        
         <List style={{backgroundColor: "#DBDADA"}}>
-        {games.slice(0,6).map(game => {
+        {games.slice(0,6).map((game, index) => {
           return (
-          <ListItem noIndent style={styles.listItem}>
+          <ListItem noIndent style={styles.listItem} key={index}>
             <Text style={{lineHeight: 26}}>
               <Text style={styles.titleText}>
                 {game.name}
@@ -144,3 +169,5 @@ export default function App() {
 
 
 }
+
+export default App;
