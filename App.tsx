@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, Container, Content , List, ListItem, Item, Icon, Input, Header} from 'native-base';
+import { Text, Container, Content , List, ListItem} from 'native-base';
 import { StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import SearchBar from "./src/components/SearchBar";
