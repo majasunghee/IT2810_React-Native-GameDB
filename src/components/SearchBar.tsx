@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Container, Text, Item, Input, Icon, Button, Header} from "native-base";
+import React from "react";
+import {Item, Input, Icon, Header} from "native-base";
 
 const SearchBar = ({setSearch}) => (
 
