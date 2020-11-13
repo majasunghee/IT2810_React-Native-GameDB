@@ -1,15 +1,30 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
+import Modal from "./src/components/Modal";
 
 export default function App() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
 
+  const [show, setShow] = useState(false);
+  const [details, setDetails] = useState();
+  const [index, setIndex] = useState();
+
   useEffect(() => {
     fetchEvents();
   }, []);
+
+  const handleClick = (index) => {
+    setIndex(index);
+    setDetails(games[index]);
+    setShow(true);
+  };
+
+  const closeModal = () => {
+    setShow(false);
+  };
 
   const fetchEvents = () => {
     let requestBody = {
@@ -56,27 +71,36 @@ export default function App() {
       });
   };
 
+  const styles = StyleSheet.create({
+    box: {
+      padding: 15,
+    },
+  });
+
   return (
     <React.Fragment>
       <NavBar></NavBar>
       <View>
         {games.map((game, index) => {
-          return <Text>{game.name}</Text>;
+          return (
+            <Text
+              style={styles.box}
+              key={index}
+              onPress={handleClick.bind(this, index)}
+            >
+              {game.name}
+            </Text>
+          );
         })}
       </View>
-
       <View>
         <StatusBar style="auto" />
       </View>
+      {show == true ? (
+        <View>
+          <Modal detail={details} close={closeModal} />
+        </View>
+      ) : null}
     </React.Fragment>
   );
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  });
 }
