@@ -34,6 +34,13 @@ Når man trykker på et av spillene i søkeresultatet kommer det opp en modal so
 
 ### Tredjepartskomponenter
 
-### Testing (manuell e2e)
+### Manuell e2e testing
+Til dette prosjektet har vi gjennomført manuell end-to-end testing i henhold til kravet til testing. Vi har testet applikasjonen på en Adroid enhet og en iOS enhet for å dekke de vanligste mobile enhetene. Under er det lagt ved en grafisk representasjon som viser forventet oppførsel og visning når en bruker interagerer med applikasjonen.
+
+![image](/uploads/0277fe16684730b56138509200bd43f3/image.png)
+
+**Testing på Android enhet**
+
+**Testing på iOS-enhet**
 
 ### Git og GitLab
