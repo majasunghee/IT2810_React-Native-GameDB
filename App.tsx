@@ -3,11 +3,12 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
 import Modal from "./src/components/Modal";
-import { Container, Content, List, ListItem } from "native-base";
+import {Container, Content, List, ListItem, Picker, Icon, Left, Right } from "native-base";
 import SearchBar from "./src/components/SearchBar";
 import Pagination from "./src/components/Pagination";
 import * as Font from "expo-font";
-import styles from "./AppStyles";
+import ListRender from './src/components/ListRender';
+import FilterPicker from './src/components/FilterPicker';
 
 interface IGame {
   name: string;
@@ -25,9 +26,6 @@ interface IGame {
 
 const App: React.FC<IGame> = () => {
   const [games, setGames] = useState<IGame[]>([]);
-  const [search, setSearch] = useState<string>("");
-
-
   const [price, setPrice] = useState<string>("");
 
   const [pageNum, setPageNum] = useState<number>(1);
@@ -35,6 +33,12 @@ const App: React.FC<IGame> = () => {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
   const pageResults: number = games.length;
+
+  //state used in searching
+  const [search, setSearch] = useState<string>("");
+
+  const [filter, setFilter] = useState<string>('none');
+
   // native base uses fonts that need to be loaded async
   useEffect(() => {
     (async () =>
@@ -100,6 +104,9 @@ const App: React.FC<IGame> = () => {
   useEffect(() => {
     fetchGames();
   }, [pageNum, search]);
+  console.log(filter);
+  console.log(pageResults);
+  console.log(search);
 
   useEffect(() => {
     if(initialRender.current) {
@@ -137,6 +144,7 @@ const App: React.FC<IGame> = () => {
     }
   }
 
+
   //Previous button is disabled if on the first page
   //Next button is enabled
   function prevButton() {
@@ -148,6 +156,10 @@ const App: React.FC<IGame> = () => {
     if (pageNum <= 2) {
       setPrevBtnDisabled(true);
     }
+  }
+
+  function updateChange(value) {
+    setFilter(value);
   }
 
   function checkIfNextBtnDisabled () {
@@ -185,29 +197,25 @@ const App: React.FC<IGame> = () => {
       <StatusBar style="auto" />
       <NavBar />
       <SearchBar setSearch={setSearch} />
+      <FilterPicker  filter={filter} updateChange={updateChange} />
       <Content>
         <View style={show ? { opacity: 0.3 } : null}>
           <List style={{ backgroundColor: "#DBDADA" }}>
-            {games.slice(0, 6).map((game, index) => {
+            {filter=='none' ?
+            games.slice(0, 6).map((game, index) => {
               return (
-                <ListItem
-                  noIndent
-                  style={styles.listItem}
-                  key={index}
-                  onPress={handleClick.bind(this, index)}
-                >
-                  <Text style={{ lineHeight: 26 }}>
-                    <Text style={styles.titleText}>{game.name}</Text>
-                    {"\n"}
-                    <Text style={{ fontWeight: "bold" }}>Price:</Text>
-                    {" " + game.msrp}
-                    {"\n"}
-                    <Text style={{ fontWeight: "bold" }}>By:</Text>
-                    {" " + game.developer}
-                  </Text>
-                </ListItem>
+                <ListRender game={game} index={index} handleClick={handleClick}/>
               );
-            })}
+            }) : 
+            games.filter((e)=> {
+              return e.esrb == filter
+            }).slice(0, 6)
+              .map((game, index)=>{
+                return (
+                  <ListRender game={game} index={index} handleClick={handleClick}/> 
+                ); 
+            })}
+
           </List>
         </View>
       </Content>
