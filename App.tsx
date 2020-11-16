@@ -7,6 +7,7 @@ import { Container, Content, List, ListItem } from "native-base";
 import SearchBar from "./src/components/SearchBar";
 import Pagination from "./src/components/Pagination";
 import * as Font from "expo-font";
+import styles from "./AppStyles";
 
 interface IGame {
   name: string;
@@ -39,7 +40,6 @@ const App: React.FC<IGame> = () => {
     (async () =>
       await Font.loadAsync({
         Roboto: require("native-base/Fonts/Roboto.ttf"),
-        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       }))();
   }, []);
 
@@ -49,31 +49,8 @@ const App: React.FC<IGame> = () => {
 
   const initialRender = useRef(true);
 
-  React.useEffect(() => {
-    if(initialRender.current) {
-      initialRender.current = false;
-  } else {
-      setPageNum(1);
-      setPrevBtnDisabled(true);
-      checkIfNextBtnDisabled();
-    }
-  }, [search]);
 
-  useEffect(() => {
-    fetchEvents();
-  }, [pageNum, search]);
-
-  const handleClick = (index) => {
-    setIndex(index);
-    setDetails(games[index]);
-    setShow(true);
-  };
-
-  const closeModal = () => {
-    setShow(false);
-  };
-
-  const fetchEvents = () => {
+  const fetchGames = () => {
     let requestBody = {
       query: `
                     query {
@@ -116,6 +93,35 @@ const App: React.FC<IGame> = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  //rendres the fetching games function when either
+  //the searchword or pagenumber changes
+  useEffect(() => {
+    fetchGames();
+  }, [pageNum, search]);
+
+  useEffect(() => {
+    if(initialRender.current) {
+      initialRender.current = false;
+  } else {
+      setPageNum(1);
+      setPrevBtnDisabled(true);
+      checkIfNextBtnDisabled();
+    }
+  }, [search]);
+
+  //used to keep track of the game element that
+  //has been clicked
+  const handleClick = (index) => {
+    setIndex(index);
+    setDetails(games[index]);
+    setShow(true);
+  };
+
+  //closes the modal
+  const closeModal = () => {
+    setShow(false);
   };
 
   //Previous button is clickable  except when on the fist page number
@@ -180,28 +186,30 @@ const App: React.FC<IGame> = () => {
       <NavBar />
       <SearchBar setSearch={setSearch} />
       <Content>
-        <List style={{ backgroundColor: "#DBDADA" }}>
-          {games.slice(0, 6).map((game, index) => {
-            return (
-              <ListItem
-                noIndent
-                style={styles.listItem}
-                key={index}
-                onPress={handleClick.bind(this, index)}
-              >
-                <Text style={{ lineHeight: 26 }}>
-                  <Text style={styles.titleText}>{game.name}</Text>
-                  {"\n"}
-                  <Text style={{ fontWeight: "bold" }}>Price:</Text>
-                  {" " + game.msrp}
-                  {"\n"}
-                  <Text style={{ fontWeight: "bold" }}>By:</Text>
-                  {" " + game.developer}
-                </Text>
-              </ListItem>
-            );
-          })}
-        </List>
+        <View style={show ? { opacity: 0.3 } : null}>
+          <List style={{ backgroundColor: "#DBDADA" }}>
+            {games.slice(0, 6).map((game, index) => {
+              return (
+                <ListItem
+                  noIndent
+                  style={styles.listItem}
+                  key={index}
+                  onPress={handleClick.bind(this, index)}
+                >
+                  <Text style={{ lineHeight: 26 }}>
+                    <Text style={styles.titleText}>{game.name}</Text>
+                    {"\n"}
+                    <Text style={{ fontWeight: "bold" }}>Price:</Text>
+                    {" " + game.msrp}
+                    {"\n"}
+                    <Text style={{ fontWeight: "bold" }}>By:</Text>
+                    {" " + game.developer}
+                  </Text>
+                </ListItem>
+              );
+            })}
+          </List>
+        </View>
       </Content>
       {show == true ? (
         <View>
