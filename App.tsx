@@ -7,7 +7,7 @@ import { Container, Content, List, ListItem } from "native-base";
 import SearchBar from "./src/components/SearchBar";
 import Pagination from "./src/components/Pagination";
 import * as Font from "expo-font";
-import styles from './AppStyles';
+import styles from "./AppStyles";
 
 interface IGame {
   name: string;
@@ -46,7 +46,6 @@ const App: React.FC<IGame> = () => {
     (async () =>
       await Font.loadAsync({
         Roboto: require("native-base/Fonts/Roboto.ttf"),
-        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       }))();
   }, []);
 
@@ -114,7 +113,7 @@ const App: React.FC<IGame> = () => {
   const closeModal = () => {
     setShow(false);
   };
- 
+
   //Previous button is clickable  except when on the fist page number
   //The next button is clickable as long as there are game elements in pageResults
   function nextButton() {
@@ -143,7 +142,7 @@ const App: React.FC<IGame> = () => {
       <NavBar />
       <SearchBar setSearch={setSearch} />
       <Content>
-        <View style={show ? { opacity: 0.3 } : 1}>
+        <View style={show ? { opacity: 0.3 } : null}>
           <List style={{ backgroundColor: "#DBDADA" }}>
             {games.slice(0, 6).map((game, index) => {
               return (
@@ -170,7 +169,7 @@ const App: React.FC<IGame> = () => {
       </Content>
       {show == true ? (
         <View>
-          <Modal detail={details} close={closeModal}/>
+          <Modal detail={details} close={closeModal} />
         </View>
       ) : null}
       <Pagination

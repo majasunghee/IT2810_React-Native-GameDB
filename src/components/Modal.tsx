@@ -1,7 +1,13 @@
 import React from "react";
-import {Modal, Text, View, NativeSyntheticEvent, NativeTouchEvent} from "react-native";
+import {
+  Modal,
+  Text,
+  View,
+  NativeSyntheticEvent,
+  NativeTouchEvent,
+} from "react-native";
 import { Icon } from "native-base";
-import styles from '../styles/ModalStyles';
+import styles from "../styles/ModalStyles";
 
 type ComponentProps = {
   name: String;
@@ -46,35 +52,35 @@ const Modals = (props: { close: SendCloseModal; detail: ComponentProps }) => {
                 {"\n"}
                 {"\n"}
 
-                <View style={styles.en}>
+                <View style={styles.infoTextContainer}>
                   <Text style={styles.infoText}>Developer: </Text>
                 </View>
-                <View style={styles.to}>
+                <View style={styles.infoContainer}>
                   <Text>{props.detail.developer}</Text>
                 </View>
 
                 <Text style={styles.filler}></Text>
 
-                <View style={styles.tre}>
+                <View style={styles.infoTextContainer}>
                   <Text style={styles.infoText}>Release date: </Text>
                 </View>
-                <View style={styles.fire}>
+                <View style={styles.infoContainer}>
                   <Text>{props.detail.releasedate}</Text>
                 </View>
-
+                {"\n"}
                 <Text style={styles.filler}></Text>
-                <View style={styles.en}>
+                <View style={styles.infoTextContainer}>
                   <Text style={styles.infoText}>Genre: </Text>
                 </View>
-                <View style={styles.to}>
-                  <Text> {props.detail.genre}</Text>
+                <View style={styles.infoContainer}>
+                  <Text>{props.detail.genre}</Text>
                 </View>
-
+                {"\n"}
                 <Text style={styles.filler}></Text>
-                <View style={styles.en}>
+                <View style={styles.infoTextContainer}>
                   <Text style={styles.infoText}>Price: </Text>
                 </View>
-                <Text style={styles.to}> {props.detail.msrp}$</Text>
+                <Text style={styles.infoContainer}>{props.detail.msrp}$</Text>
               </Text>
             </View>
           </View>
