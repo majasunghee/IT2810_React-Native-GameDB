@@ -8,7 +8,7 @@ import SearchBar from "./src/components/SearchBar";
 import Pagination from "./src/components/Pagination";
 import * as Font from "expo-font";
 import ListRender from './src/components/ListRender';
-import styles from './AppStyles';
+import FilterPicker from './src/components/FilterPicker';
 
 interface IGame {
   name: string;
@@ -26,9 +26,6 @@ interface IGame {
 
 const App: React.FC<IGame> = () => {
   const [games, setGames] = useState<IGame[]>([]);
-  const [search, setSearch] = useState<string>("");
-
-
   const [price, setPrice] = useState<string>("");
 
   const [pageNum, setPageNum] = useState<number>(1);
@@ -200,29 +197,7 @@ const App: React.FC<IGame> = () => {
       <StatusBar style="auto" />
       <NavBar />
       <SearchBar setSearch={setSearch} />
-      <View style={{backgroundColor: 'red', flexDirection: 'row', maxHeight: 50 }}>
-        
-        <Text style={ {color: 'white',fontSize: 18, flex: 1, alignItems: 'center', textAlignVertical: 'center', paddingLeft: 15, fontWeight: 'bold'}}>Filter on PEGI: </Text>
-      
-      <View style={{backgroundColor:'white',  flex:1, margin: 5, marginRight:10, justifyContent: 'center', paddingLeft:10}}>
-      <Picker 
-        style={{ backgroundColor:'green'}}
-        mode='dropdown' 
-        iosHeader='Filter'
-        selectedValue={filter}
-        onValueChange={(val) => updateChange(val)}
-        >
-        <Picker.Item label='clear filter' value='none' />
-        <Picker.Item label='Everyone' value='Everyone'/>
-        <Picker.Item label='Everyone +10' value='Everyone +10'/>
-        <Picker.Item label='Teen' value='Teen'/>
-        <Picker.Item label='Mature' value='Mature'/>
-        
-      </Picker>
-      </View>
-
-      </View>
-      
+      <FilterPicker  filter={filter} updateChange={updateChange} />
       <Content>
         <View style={show ? { opacity: 0.3 } : null}>
           <List style={{ backgroundColor: "#DBDADA" }}>
