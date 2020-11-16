@@ -34,6 +34,7 @@ Når man trykker på et av spillene i søkeresultatet kommer det opp en modal so
 ### Typescript og koding
 
 ### Tredjepartskomponenter
+I dette prosjektet brukes Native Base. Native Base er et UI-bibliotek for React Native, som gjør det enkelt å implementere vanlige mobilapplikasjonsfunksjonaliteter. 
 
 ### Manuell e2e testing
 Til dette prosjektet har vi gjennomført manuell end-to-end testing i henhold til kravet til testing. Vi har testet applikasjonen på en Adroid enhet og en iOS enhet for å dekke de vanligste mobile enhetene. Under er det lagt ved en grafisk representasjon som viser forventet oppførsel og visning når en bruker interagerer med applikasjonen.
