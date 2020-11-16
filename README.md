@@ -1,6 +1,6 @@
 # IT2810 Prosjekt 4, alternativ A
 
-I dette prosjektet har gruppen arbeidet videre med prosjekt 3 og satt opp prosjektet i React Native.
+I dette prosjektet har gruppen arbeidet videre med egen kode fra prosjekt 3 og satt dette opp i React Native. 
 
 ## Kjøre prosjektet
 
@@ -23,7 +23,8 @@ Paginering er en ny funksjon som vi ikke rakk å implementere ferdig i prosjekt 
 Funksjonene og statene definert i App.tsx blir sendt ned til komponenten Pagination.js. Det er i denne komponenten knappene for previous og next er definert, og dermed her vi kaller på funksjonene nextButton() og prevButton() fra.
 
 ### Detaljert visning
-Når man trykker på et av spillene i søkeresultatet kommer det opp en modal som viser mer informasjon om pris, sjanger og utgivelsesdato til spillet. I prosjekt 3 brukte vi Bootstrap sin modal komponent til å vise dette. Bootstrap er imidlertid ikke kompatibelt med React Native og vi ble derfor nødt til å velge en annen løsning for dette prosjektet. Valget falt på React Native sin innebygde modal komponent ettersom bruken av denne på mange måter ligner på Bootstrap sin modal, noe som gjorde det enkelt å gjenbruke deler av koden vår fra prosjekt 3. Vi har likevel valgt å gjøre en del endringer på designet til modalen for å tilpasse visningen til en mobilskjerm. I tillegg har vi også valgt å legge modalen i en egen komponent for å gjøre koden litt mer oversiktlig.
+Når man trykker på et av spillene i søkeresultatet kommer det opp en modal som viser mer informasjon om pris, sjanger og utgivelsesdato til spillet. I prosjekt 3 brukte vi Bootstrap sin modal komponent til å vise dette. Bootstrap er imidlertid ikke kompatibelt med React Native og vi ble derfor nødt til å velge en annen løsning for dette prosjektet. Valget falt på React Native sin innebygde modal komponent ettersom bruken av denne på mange måter ligner på Bootstrap sin modal, noe som gjorde det enkelt å gjenbruke deler av koden vår fra prosjekt 3.
+Vi har likevel valgt å gjøre en del endringer på designet til modalen for å tilpasse visningen til en mobilskjerm. I tillegg har vi også valgt å legge modalen i en egen komponent for å gjøre koden litt mer oversiktlig.
 
 ### Søkeresultat med sortering og filtrering
 
@@ -31,10 +32,17 @@ Når man trykker på et av spillene i søkeresultatet kommer det opp en modal so
 
 ### React Native og Expo
 
-### Typescript og koding
+Fronted i prosjektet er laget med React Native og Typescript.For å sette opp prosjektetet har vi brukt kommandoen expo init. Vi har også brukt expo underveis i prosjektet til å kjøre appen på mobil eller nettleser.
+Vi har bevvist prøvd å bruke om igjen så mye som mulig av koden vår fra prosjekt 3 i dette prosjektet, og fokuset har vært på å gjøre endringer der det trengs for å tilpasse koden til React Native. Likevel har vi i dette prosjektet også skrevet en del ny kode da vi har lagt til funksjoner som vi ikke fikk implementert i porosjekt 3. Dette har vi gjort fordi...  
+
+Ettersom CSS ikke er støttet i React Native har vi brukt StyleSheet-objekter for å style de ulike komponentene og gi appen et fint og brukervennlig design. Vi har ikke lagt til rette for at appen skal være brukervennlig i nettlesere ettersom prosjektet ikke er ment for dette.
+
+
+
+
 
 ### Tredjepartskomponenter
-I dette prosjektet brukes Native Base. Native Base er et UI-bibliotek for React Native, som gjør det enkelt å implementere vanlige mobilapplikasjonsfunksjonaliteter. 
+I dette prosjektet brukes Native Base. Native Base er et UI-bibliotek for React Native, som gjør det enkelt å implementere vanlige mobilapplikasjonsfunksjonaliteter. Vi har blandt annet brukt Native Base til å hente ut et kryss-ikon for å lukke modalen og til å vise spillene som blir hentet ut i en liste....  
 
 ### Manuell e2e testing
 Til dette prosjektet har vi gjennomført manuell end-to-end testing i henhold til kravet til testing. Vi har testet applikasjonen på en Adroid enhet og en iOS enhet for å dekke de vanligste mobile enhetene. Under er det lagt ved en grafisk representasjon som viser forventet oppførsel og visning når en bruker interagerer med applikasjonen.
@@ -45,4 +53,3 @@ Til dette prosjektet har vi gjennomført manuell end-to-end testing i henhold ti
 
 **Testing på iOS-enhet**
 
-### Git og GitLab
