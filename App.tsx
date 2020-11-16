@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
-import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
 import Modal from "./src/components/Modal";
 import { Container, Content, List, ListItem } from "native-base";
@@ -24,23 +24,17 @@ interface IGame {
 }
 
 const App: React.FC<IGame> = () => {
-  //state that hold the fetched games
   const [games, setGames] = useState<IGame[]>([]);
+  const [search, setSearch] = useState<string>("");
 
-  //states used in the modal
-  const [show, setShow] = useState(false);
-  const [details, setDetails] = useState();
-  const [index, setIndex] = useState();
 
-  //states used in pagination
+  const [price, setPrice] = useState<string>("");
+
   const [pageNum, setPageNum] = useState<number>(1);
+
   const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
   const pageResults: number = games.length;
-
-  //state used in searching
-  const [search, setSearch] = useState<string>("");
-
   // native base uses fonts that need to be loaded async
   useEffect(() => {
     (async () =>
@@ -49,7 +43,13 @@ const App: React.FC<IGame> = () => {
       }))();
   }, []);
 
-  //fetches needed games
+  const [show, setShow] = useState(false);
+  const [details, setDetails] = useState();
+  const [index, setIndex] = useState();
+
+  const initialRender = useRef(true);
+
+
   const fetchGames = () => {
     let requestBody = {
       query: `
@@ -101,6 +101,16 @@ const App: React.FC<IGame> = () => {
     fetchGames();
   }, [pageNum, search]);
 
+  useEffect(() => {
+    if(initialRender.current) {
+      initialRender.current = false;
+  } else {
+      setPageNum(1);
+      setPrevBtnDisabled(true);
+      checkIfNextBtnDisabled();
+    }
+  }, [search]);
+
   //used to keep track of the game element that
   //has been clicked
   const handleClick = (index) => {
@@ -117,24 +127,58 @@ const App: React.FC<IGame> = () => {
   //Previous button is clickable  except when on the fist page number
   //The next button is clickable as long as there are game elements in pageResults
   function nextButton() {
-    if (pageNum >= 1) {
+    if (pageResults > 6) {
+      setNextBtnDisabled(false); 
+      setPageNum(pageNum + 1);
       setPrevBtnDisabled(false);
-      if (pageResults < 12) {
-        setNextBtnDisabled(true);
-      }
     }
-    setPageNum(pageNum + 1);
+    if (pageResults < 12) {
+      setNextBtnDisabled(true); 
+    }
   }
 
   //Previous button is disabled if on the first page
   //Next button is enabled
   function prevButton() {
+    if (pageNum > 1) {
+      setPrevBtnDisabled(false);
+      setPageNum(pageNum - 1);
+      setNextBtnDisabled(false);
+    }
     if (pageNum <= 2) {
       setPrevBtnDisabled(true);
     }
-    setNextBtnDisabled(false);
-    setPageNum(pageNum - 1);
   }
+
+  function checkIfNextBtnDisabled () {
+    if (pageResults > 6) {
+      setNextBtnDisabled(false);
+    }
+    if (pageResults <= 6) {
+      setNextBtnDisabled(true);
+    }
+  }
+
+  console.log("Games objects = " + pageResults);
+  console.log("Page number is =" + pageNum);
+  console.log(nextBtnDisabled);
+
+
+
+  //console.log(pageNum); // console.log("Pageresults = " +pageResults); // console.log("pageNum" + pageNum);
+  const styles = StyleSheet.create({
+    listItem: {
+      backgroundColor: "white",
+      elevation: 5,
+      margin: 6,
+      padding: 5,
+    },
+    titleText: {
+      fontWeight: "bold",
+      fontSize: 20,
+      textTransform: "uppercase",
+    },
+  });
 
   return (
     <Container>
