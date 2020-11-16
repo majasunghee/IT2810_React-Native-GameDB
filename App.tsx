@@ -143,28 +143,30 @@ const App: React.FC<IGame> = () => {
       <NavBar />
       <SearchBar setSearch={setSearch} />
       <Content>
-        <List style={{ backgroundColor: "#DBDADA" }}>
-          {games.slice(0, 6).map((game, index) => {
-            return (
-              <ListItem
-                noIndent
-                style={styles.listItem}
-                key={index}
-                onPress={handleClick.bind(this, index)}
-              >
-                <Text style={{ lineHeight: 26 }}>
-                  <Text style={styles.titleText}>{game.name}</Text>
-                  {"\n"}
-                  <Text style={{ fontWeight: "bold" }}>Price:</Text>
-                  {" " + game.msrp +' $'}
-                  {"\n"}
-                  <Text style={{ fontWeight: "bold" }}>By:</Text>
-                  {" " + game.developer}
-                </Text>
-              </ListItem>
-            );
-          })}
-        </List>
+        <View style={show ? { opacity: 0.3 } : 1}>
+          <List style={{ backgroundColor: "#DBDADA" }}>
+            {games.slice(0, 6).map((game, index) => {
+              return (
+                <ListItem
+                  noIndent
+                  style={styles.listItem}
+                  key={index}
+                  onPress={handleClick.bind(this, index)}
+                >
+                  <Text style={{ lineHeight: 26 }}>
+                    <Text style={styles.titleText}>{game.name}</Text>
+                    {"\n"}
+                    <Text style={{ fontWeight: "bold" }}>Price:</Text>
+                    {" " + game.msrp}
+                    {"\n"}
+                    <Text style={{ fontWeight: "bold" }}>By:</Text>
+                    {" " + game.developer}
+                  </Text>
+                </ListItem>
+              );
+            })}
+          </List>
+        </View>
       </Content>
       {show == true ? (
         <View>

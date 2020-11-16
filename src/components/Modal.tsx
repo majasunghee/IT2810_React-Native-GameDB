@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  NativeSyntheticEvent,
-  NativeTouchEvent,
-} from "react-native";
+import React from "react";
+import {Modal, Text, View, NativeSyntheticEvent, NativeTouchEvent} from "react-native";
+import { Icon } from "native-base";
+import styles from '../styles/ModalStyles';
 
 type ComponentProps = {
   name: String;
@@ -27,49 +21,67 @@ const Modals = (props: { close: SendCloseModal; detail: ComponentProps }) => {
       <Modal animationType="fade" transparent={true}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.headText}>{props.detail.name}</Text>
-            <Text>Developer: {props.detail.developer}</Text>
-            <Text>Release date: {props.detail.releasedate}</Text>
-            <Text>Genre: {props.detail.genre}</Text>
-            <Text>price: {props.detail.msrp}</Text>
-            <Button onPress={props.close} title="Close"></Button>
+            <View style={{ flexDirection: "row-reverse" }}>
+              <Icon
+                name="close"
+                style={{
+                  fontSize: 35,
+                  marginRight: 20,
+                  marginTop: 2,
+                }}
+                onPress={props.close}
+              />
+            </View>
+            <View style={styles.modalViews}>
+              <Text>
+                <View style={{ width: 220 }}>
+                  <Text style={styles.headText}>{props.detail.name}</Text>
+                  <View
+                    style={{
+                      borderBottomWidth: 2,
+                      borderColor: "#00c3e3",
+                    }}
+                  />
+                </View>
+                {"\n"}
+                {"\n"}
+
+                <View style={styles.en}>
+                  <Text style={styles.infoText}>Developer: </Text>
+                </View>
+                <View style={styles.to}>
+                  <Text>{props.detail.developer}</Text>
+                </View>
+
+                <Text style={styles.filler}></Text>
+
+                <View style={styles.tre}>
+                  <Text style={styles.infoText}>Release date: </Text>
+                </View>
+                <View style={styles.fire}>
+                  <Text>{props.detail.releasedate}</Text>
+                </View>
+
+                <Text style={styles.filler}></Text>
+                <View style={styles.en}>
+                  <Text style={styles.infoText}>Genre: </Text>
+                </View>
+                <View style={styles.to}>
+                  <Text> {props.detail.genre}</Text>
+                </View>
+
+                <Text style={styles.filler}></Text>
+                <View style={styles.en}>
+                  <Text style={styles.infoText}>Price: </Text>
+                </View>
+                <Text style={styles.to}> {props.detail.msrp}$</Text>
+              </Text>
+            </View>
           </View>
         </View>
       </Modal>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  headText: {
-    fontSize: 20,
-    marginBottom: 30,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-});
 
 export default Modals;
