@@ -32,8 +32,8 @@ Vi har likevel valgt å gjøre en del endringer på designet til modalen for å 
 
 ### React Native og Expo
 
-Fronted i prosjektet er laget med React Native og Typescript.For å sette opp prosjektetet har vi brukt kommandoen expo init. Vi har også brukt expo underveis i prosjektet til å kjøre appen på mobil eller nettleser.
-Vi har bevvist prøvd å bruke om igjen så mye som mulig av koden vår fra prosjekt 3 i dette prosjektet, og fokuset har vært på å gjøre endringer der det trengs for å tilpasse koden til React Native. Likevel har vi i dette prosjektet også skrevet en del ny kode da vi har lagt til funksjoner som vi ikke fikk implementert i porosjekt 3. Dette har vi gjort fordi...  
+Fronted i prosjektet er laget med React Native og Typescript. For å sette opp prosjektetet har vi brukt kommandoen 'expo init prosjekt4'. Vi har også brukt expo underveis i prosjektet til å kjøre appen på mobil eller i nettleseren.
+Vi har bevvist prøvd å bruke om igjen så mye som mulig av koden vår fra prosjekt 3 og fokuset har altså vært på å gjøre endringer der det trengs for å tilpasse koden til React Native. Likevel har vi i dette prosjektet også skrevet en del ny kode da vi har lagt til funksjoner som vi ikke fikk implementert i porosjekt 3. Dette har vi gjort fordi vi ikke følte at funksjonaliteten i appen vår var tilstrekkelig for å få vist kunnskap i utvikkling av app for mobil og React Native. 
 
 Ettersom CSS ikke er støttet i React Native har vi brukt StyleSheet-objekter for å style de ulike komponentene og gi appen et fint og brukervennlig design. Vi har ikke lagt til rette for at appen skal være brukervennlig i nettlesere ettersom prosjektet ikke er ment for dette.
 
