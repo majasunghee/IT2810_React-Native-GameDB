@@ -32,12 +32,7 @@ const Modals = (props: { close: any; detail: ComponentProps }) => {
             <Text>
               <View style={{ width: 220 }}>
                 <Text style={styles.headText}>{props.detail.name}</Text>
-                <View
-                  style={{
-                    borderBottomWidth: 2,
-                    borderColor: "#62B1F6",
-                  }}
-                />
+                <View style={styles.line} />
               </View>
               {"\n"}
               {"\n"}
@@ -70,13 +65,18 @@ const Modals = (props: { close: any; detail: ComponentProps }) => {
               <View style={styles.infoTextContainer}>
                 <Text style={styles.infoText}>Price: </Text>
               </View>
-              <Text style={styles.infoContainer}>{props.detail.msrp}$</Text>
+              <View style={styles.infoContainer}>
+                <Text>{props.detail.msrp}$</Text>
+              </View>
+
               {"\n"}
               <Text style={styles.filler}></Text>
               <View style={styles.infoTextContainer}>
                 <Text style={styles.infoText}>PEGI: </Text>
               </View>
-              <Text style={styles.infoContainer}>{props.detail.esrb}</Text>
+              <View style={styles.infoContainer}>
+                <Text>{props.detail.esrb}</Text>
+              </View>
             </Text>
           </View>
         </View>
