@@ -47,7 +47,11 @@ Ettersom CSS ikke er støttet i React Native har vi brukt StyleSheet-objekter fo
 
 
 ### Tredjepartskomponenter
-I dette prosjektet brukes Native Base. Native Base er et UI-bibliotek for React Native, som gjør det enkelt å implementere vanlige mobilapplikasjonsfunksjonaliteter. Vi har blandt annet brukt Native Base til å hente ut et kryss-ikon for å lukke modalen og til å vise spillene som blir hentet ut i en liste. Vi bruker  Native Bases Picker-komponent som viser en drop-down meny med filtreringsmuligheter og paginering bruker Native Bases Button-komponenter, på grunn av sine innebygde funksjonaliteter til å gråe ut "disabled"-knapper.
+I dette prosjektet brukes Native Base. Native Base er et UI-bibliotek for React Native, som gjør det enkelt å implementere vanlige mobilapplikasjonsfunksjonaliteter. Vi har blandt annet brukt Native Base til:
+* Et kryss-ikon for å lukke modalen.
+* Listevisningen av spillene som blir hentet, ved å bruke List og ListItem komponenetene.
+* En drop-down meny med filtreringsmuligheter, ved hjelp av en Picker-komponent.
+* Knappene til pagineringen, fordi Button-komponentene har innebygde funksjonaliteter til å gråe ut "disabled"-knapper.
 
 ### Manuell e2e testing
 Til dette prosjektet har vi gjennomført manuell end-to-end testing i henhold til kravet til testing. Vi har testet applikasjonen på en Adroid enhet og en iOS enhet for å dekke de vanligste mobile enhetene. Alle gruppemdelemmene har Android enheter, og vi har dermed kunnet utvikle og teste applikasjonen kontinuerlig for denne enheten. Under utvikling var den minste enheten vi har testet med en enhet med 5.5" skjermstørrelse, og vi har ikke testet at applikasjonen er like responsiv for enheter minde enn det. For å få testet applikasjonen på en iOS enhet fikk vi en bekjent til å teste applikasjonen. For å kunne sammenligne forventet oppførsel og funksjonalitet i applikasjonen på to ulike enheter, har vi opprettet noen veiledende testoppgaver som ble utført av testpersonene.
