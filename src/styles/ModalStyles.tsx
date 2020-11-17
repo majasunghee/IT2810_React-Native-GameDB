@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   centeredView: {
-    flex: 1,
     justifyContent: "center",
-    marginTop: 22,
+    alignItems: "center",
+    marginTop: 170,
   },
   modalViews: {
     padding: 35,
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
+
     paddingTop: 8,
     shadowColor: "#000",
 

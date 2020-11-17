@@ -1,13 +1,6 @@
 import React from "react";
-import { Button, Icon, Title, Text } from "native-base";
-import {
-  StyleSheet,
-  View,
-  NativeSyntheticEvent,
-  NativeTouchEvent,
-} from "react-native";
-
-//TouchableOpacity.defaultProps = { activeOpacity: 0.5 };
+import { Button, Icon, Text } from "native-base";
+import { StyleSheet, View } from "react-native";
 
 const Pagination = (props: {
   nextButton: any;

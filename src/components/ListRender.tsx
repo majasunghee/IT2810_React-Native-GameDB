@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  NativeSyntheticEvent,
-  NativeTouchEvent,
-  GestureResponderEvent,
-} from "react-native";
+import { StyleSheet } from "react-native";
 import { Text, ListItem } from "native-base";
 
 type ComponentProps = {
