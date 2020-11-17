@@ -182,7 +182,6 @@ const App: React.FC<IGame> = () => {
 
   //Checks if there are more than 6 elements in the pageResults list. If not, both the prev and next button will be greyed out and disabled.
   function checkIfNextBtnDisabled() {
-    console.log(pageResults);
     if (pageResults > 6) {
       setNextBtnDisabled(false);
     }
