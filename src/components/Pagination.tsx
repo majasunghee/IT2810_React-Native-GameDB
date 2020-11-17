@@ -14,6 +14,7 @@ const Pagination = (props: {
   prevButton: any;
   prevBtnDisabled: boolean;
   nextBtnDisabled: boolean;
+  pageNum: number;
 }) => {
   return (
     <View style={styles.buttonContainer}>
