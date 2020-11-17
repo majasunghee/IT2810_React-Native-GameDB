@@ -85,5 +85,12 @@ Til slutt testet vi filtreringsfunksjonen. Her byttet vi mellom ulike filtrering
 
 **Testing på iOS-enhet**
 
+I tillegg har gruppen også testet på en Iphone med 6" for å sjekke at applikasjonen også fungerer fint på en mobil med iOS opperativsystem. 
+Alle fem testoppgavene ble gjennomført og all funksjonalitet i applikasjonen fungerte som forventet. Resultatet av testene ble med andre ord likt som for testene utført på Android beskrevet over.
+
+Selv om all funksjonaliteten er den samme er designet på appen er litt annerledes på iOS enn på Android. Dette gjelder i hovedsak søkefeltet og filtreringen
+som har et litt mindre "fint" og brukervennlig design. Likevel er begge funksjonalitetene fullt mulig å bruke uten problemer, så dette er ikke noe gruppen 
+ser på som et problem. Det er derfor heller ikke gjort noen endringer for å tilpasse designet.
+
 ![image](/uploads/13a237ef7b88004f4abc3e751779ea60/image.png)
 
