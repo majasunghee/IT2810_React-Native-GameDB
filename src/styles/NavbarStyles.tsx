@@ -6,7 +6,8 @@ let ScreenWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
     navBar: {
       backgroundColor: "red",
-      paddingTop: 16,
+      paddingTop: 20,
+      paddingLeft: 4,
       width: ScreenWidth,
       flexWrap: "wrap",
       alignItems: "flex-start",
@@ -19,12 +20,13 @@ const styles = StyleSheet.create({
           {scaleY: 0.6}
         ]
     },
-    navText: {
-      color: "#ffff",
-      fontSize: 26,
-      marginTop: 22,
-      fontVariant: [ 'small-caps' ],
-      fontWeight: 'bold' ,
+    dbLogo: {
+      paddingLeft: 10,
+      transform: 
+        [
+          {scaleX: 0.8}, 
+          {scaleY: 0.8}
+        ]
     }
   });
   
