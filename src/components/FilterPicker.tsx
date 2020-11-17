@@ -5,6 +5,7 @@ import styles from "../styles/FilterPickerStyles";
 
 const FilterPicker = (props: { updateChange: any; filter: String }) => {
   return (
+    //Shows a dropdow menu with filtering options
     <View
       style={{ backgroundColor: "red", flexDirection: "row", maxHeight: 50 }}
     >

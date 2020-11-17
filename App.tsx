@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
 import Modal from "./src/components/Modal";
@@ -36,16 +36,28 @@ const App: React.FC<IGame> = () => {
   const [index, setIndex] = useState();
 
   //States used for pagination
-  const pageResults: number = games.length;
   const [pageNum, setPageNum] = useState<number>(1);
   const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
+
+  let pageResults: number = 0;
+  if(filter!=='none'){
+    const filteredGames = games.filter((e) => {
+      return e.esrb === filter;
+    })
+    pageResults = filteredGames.length;
+  }
+  else {
+    pageResults= games.length;
+    } 
+  
 
   //State used for searching
   const [search, setSearch] = useState<string>(""); 
 
   //Variable that returns a mutable ref object
   const initialRender = useRef(true);
+
 
   const fetchGames = () => {
     let requestBody = {
@@ -103,7 +115,7 @@ const App: React.FC<IGame> = () => {
   //Renders the fetching games function when either the searchword or pagenumber changes
   useEffect(() => {
     fetchGames();
-  }, [pageNum, search]);
+  }, [pageNum, search, filter]);
 
   //Resets the pagenumber and checks if there are more than 6 elements to page on when the searchword changes
   useEffect(() => {
@@ -114,12 +126,21 @@ const App: React.FC<IGame> = () => {
       setPrevBtnDisabled(true);
       checkIfNextBtnDisabled();
     }
-  }, [search]);
+  }, [search, filter]);
 
   //Keeps track of the game element that has been clicked
   const handleClick = (index) => {
     setIndex(index);
-    setDetails(games[index]);
+    if(filter!=='none'){
+      const filteredGames = games.filter((e) => {
+        return e.esrb === filter;
+      })
+      setDetails(filteredGames[index]);
+    }
+    else {
+      setDetails(games[index]);
+      } 
+    
     setShow(true);
   };
 
@@ -161,6 +182,7 @@ const App: React.FC<IGame> = () => {
 
   //Checks if there are more than 6 elements in the pageResults list. If not, both the prev and next button will be greyed out and disabled.
   function checkIfNextBtnDisabled() {
+    console.log(pageResults);
     if (pageResults > 6) {
       setNextBtnDisabled(false);
     }
@@ -169,19 +191,6 @@ const App: React.FC<IGame> = () => {
     }
   }
 
-  const styles = StyleSheet.create({
-    listItem: {
-      backgroundColor: "white",
-      elevation: 5,
-      margin: 6,
-      padding: 5,
-    },
-    titleText: {
-      fontWeight: "bold",
-      fontSize: 20,
-      textTransform: "uppercase",
-    },
-  });
 
   return (
     <Container>

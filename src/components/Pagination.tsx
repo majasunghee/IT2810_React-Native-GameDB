@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Icon } from "native-base";
-import { StyleSheet, View, Text } from "react-native";
+import { View, Text } from "react-native";
+import styles from '../styles/PaginationStyles';
 
 const Pagination = (props: {
   nextButton: any;
@@ -39,23 +40,6 @@ const Pagination = (props: {
   );
 };
 
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    flex: 1,
-    alignItems: "center",
-  },
-  textStyling: {
-    color: "white",
-    fontSize: 15,
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    padding: 5,
-  }
-});
+
 
 export default Pagination;
