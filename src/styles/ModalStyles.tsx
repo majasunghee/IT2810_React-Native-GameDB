@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
     padding: 35,
     paddingTop: 0,
   },
+  line: {
+    borderBottomWidth: 2,
+    borderColor: "#62B1F6",
+  },
   modalView: {
     margin: 20,
     backgroundColor: "white",

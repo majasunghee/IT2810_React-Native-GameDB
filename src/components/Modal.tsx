@@ -35,7 +35,7 @@ const Modals = (props: { close: any; detail: ComponentProps }) => {
                 <View
                   style={{
                     borderBottomWidth: 2,
-                    borderColor: "#00c3e3",
+                    borderColor: "#62B1F6",
                   }}
                 />
               </View>
