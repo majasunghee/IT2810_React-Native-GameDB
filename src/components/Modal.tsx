@@ -5,6 +5,7 @@ import {
   View,
   NativeSyntheticEvent,
   NativeTouchEvent,
+  GestureResponderEvent,
 } from "react-native";
 import { Icon } from "native-base";
 import styles from "../styles/ModalStyles";
@@ -17,11 +18,7 @@ type ComponentProps = {
   msrp: string;
 };
 
-type SendCloseModal = {
-  closes: (ev?: NativeSyntheticEvent<NativeTouchEvent>) => void;
-};
-
-const Modals = (props: { close: SendCloseModal; detail: ComponentProps }) => {
+const Modals = (props: { close: gre; detail: ComponentProps }) => {
   return (
     <View style={styles.centeredView}>
       <Modal animationType="fade" transparent={true}>

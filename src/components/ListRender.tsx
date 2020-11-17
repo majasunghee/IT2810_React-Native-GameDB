@@ -1,21 +1,37 @@
 import React from "react";
-import {StyleSheet} from 'react-native';
+import {
+  StyleSheet,
+  NativeSyntheticEvent,
+  NativeTouchEvent,
+  GestureResponderEvent,
+} from "react-native";
 import { Text, ListItem } from "native-base";
 
-const ListRender = (props) => (
-    <ListItem
+type ComponentProps = {
+  name: String;
+  developer: String;
+  releasedate: String;
+  genre: String;
+  msrp: number;
+  publisher: String;
+};
+
+const ListRender = (props: {
+  handleClick: any;
+  game: ComponentProps;
+  index: number;
+}) => (
+  <ListItem
     noIndent
     style={styles.listItem}
     key={props.index}
-    onPress={props.handleClick.bind(this, props.index)}
+    onPress={props.handleClick}
   >
     <Text style={{ lineHeight: 26 }}>
-      <Text style={styles.titleText}>
-        {props.game.name}
-      </Text>
+      <Text style={styles.titleText}>{props.game.name}</Text>
       {"\n"}
       <Text style={{ fontWeight: "bold" }}>Price:</Text>
-      {" " + props.game.msrp +' $'}
+      {" " + props.game.msrp + " $"}
       {"\n"}
       <Text style={{ fontWeight: "bold" }}>By:</Text>
       {" " + props.game.developer}
@@ -23,9 +39,8 @@ const ListRender = (props) => (
       <Text style={{ fontWeight: "bold" }}>Publisher:</Text>
       {" " + props.game.publisher}
     </Text>
-  </ListItem> 
-)
-
+  </ListItem>
+);
 
 const styles = StyleSheet.create({
   titleText: {
@@ -38,7 +53,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     margin: 6,
     padding: 5,
-  }
+  },
 });
 
 export default ListRender;
