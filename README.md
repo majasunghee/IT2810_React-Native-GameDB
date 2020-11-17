@@ -93,5 +93,6 @@ som har et litt mindre "fint" design på iOS. Likevel er begge funksjonalitetene
 ser på som et problem. Det er derfor heller ikke gjort noen endringer for å tilpasse designet.
 
 
+
 ![image](/uploads/13a237ef7b88004f4abc3e751779ea60/image.png)
 
