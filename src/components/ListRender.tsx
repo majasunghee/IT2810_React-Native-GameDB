@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Text, ListItem } from "native-base";
+import { StyleSheet, Text } from "react-native";
+import { ListItem } from "native-base";
 
 type ComponentProps = {
   name: String;

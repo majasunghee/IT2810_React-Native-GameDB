@@ -6,7 +6,7 @@ import styles from '../styles/NavbarStyles';
 import { Left } from "native-base";
 
 const NavBar = () => (
-  //shows the title and logo of the application
+  //Shows the title and logo of the application
   <View style={styles.navBar}>
     <Image style={styles.navLogo} source={logo} />
     <Left>

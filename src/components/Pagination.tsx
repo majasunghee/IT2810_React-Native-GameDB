@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Icon, Text } from "native-base";
-import { StyleSheet, View } from "react-native";
+import { Button, Icon } from "native-base";
+import { StyleSheet, View, Text } from "react-native";
 
 const Pagination = (props: {
   nextButton: any;
@@ -10,6 +10,7 @@ const Pagination = (props: {
   pageNum: number;
 }) => {
   return (
+    //Changes page number value when previous or next button is clicked on
     <View style={styles.buttonContainer}>
       <Button
         info
@@ -20,7 +21,7 @@ const Pagination = (props: {
         onPress={props.prevButton}
       >
         <Icon name="ios-arrow-back" />
-        <Text> Previous </Text>
+        <Text style={styles.textStyling}> Prev </Text>
       </Button>
 
       <Button
@@ -31,7 +32,7 @@ const Pagination = (props: {
         disabled={props.nextBtnDisabled}
         onPress={props.nextButton}
       >
-        <Text>Next </Text>
+        <Text style={styles.textStyling}>Next </Text>
         <Icon name="ios-arrow-forward" />
       </Button>
     </View>
@@ -48,6 +49,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  textStyling: {
+    color: "white",
+    fontSize: 15,
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    padding: 5,
+  }
 });
 
 export default Pagination;
