@@ -28,7 +28,10 @@ Gjennom mye testing har vi opplevd at paginerings-funksjonen stort sett skal fun
 Når man trykker på et av spillene i søkeresultatet kommer det opp en modal som viser mer informasjon om pris, sjanger og utgivelsesdato til spillet. I prosjekt 3 brukte vi Bootstrap sin modal komponent til å vise dette. Bootstrap er imidlertid ikke kompatibelt med React Native og vi ble derfor nødt til å velge en annen løsning for dette prosjektet. Valget falt på React Native sin innebygde modal komponent ettersom bruken av denne på mange måter ligner på Bootstrap sin modal, noe som gjorde det enkelt å gjenbruke deler av koden vår fra prosjekt 3.
 Vi har likevel valgt å gjøre en del endringer på designet til modalen for å tilpasse visningen til en mobilskjerm. I tillegg har vi også valgt å legge modalen i en egen komponent for å gjøre koden litt mer oversiktlig.
 
-### Søkeresultat med sortering og filtrering
+### Filtrering
+Filtreringen rakk vi ikke å implementere i prosjekt 3, den er dermed et nytt funksjonalitet. Vi bestemte oss for å filtrere på spillets PEGI rating, dvs aldersgrensen. Dette ble gjort ved å ha en filter-state som inneholder en PEGI-rating streng. Deretter vil en lambda funksjon sjekke om filteren har blitt satt til noe annet en "none". Hvis det er tilfelle, vil lamdas else-delen først filtrere bort alle spill som har en annen PEGI-rating enn den ønskede, for å deretter utføre de samme endringer en ikke filtrert liste vil gjøre: hente ut de seks første elementer i lista med .slice(0.6) og til slutt mappe gjennom elementene og sette de inn i en Liste-komponent med Tekst-komponenter som viser spillinformasjonen.
+
+Siden filtrering gjøres fra frontend og pagineringen skjer på backend, vil pagineringen på en filtrert liste ikke funke som det er tiltenkt. Ved paginering i en filtrert liste, vil ikke den riktige rekkefølgen på elementene vises. Dette skjer fordi .skip(), som er funskjonen pagineringen bruker, hopper over x-antall objekter i databasen og tar ikke hensyn til den filtrerte lista som ligger på frontend.
 
 ## Krav til bruk av teknologi, koding, testing, dokumentasjon, levering
 
