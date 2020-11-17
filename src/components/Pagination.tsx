@@ -9,13 +9,9 @@ import {
 
 //TouchableOpacity.defaultProps = { activeOpacity: 0.5 };
 
-type Change = {
-  sendChange: (ev?: NativeSyntheticEvent<NativeTouchEvent>) => void;
-};
-
 const Pagination = (props: {
-  nextButton: Change;
-  prevButton: Change;
+  nextButton: any;
+  prevButton: any;
   prevBtnDisabled: boolean;
   nextBtnDisabled: boolean;
 }) => {

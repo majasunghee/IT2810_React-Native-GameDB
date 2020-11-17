@@ -1,17 +1,14 @@
 import React from "react";
-import {Item, Input, Icon, Header} from "native-base";
+import { Item, Input, Icon, Header } from "native-base";
 
-const SearchBar = ({setSearch}) => (
+const SearchBar = ({ setSearch }: any) => (
   //updates the search state when text is typed into the search bar
-  <Header searchBar style={{backgroundColor: 'red'}}>
-  <Item>
-    <Icon name="ios-search" />
-    <Input
-      onChangeText={text => setSearch(text)}
-      placeholder="Search" 
-      />
-  </Item>
-</Header>
-)
+  <Header searchBar style={{ backgroundColor: "red" }}>
+    <Item>
+      <Icon name="ios-search" />
+      <Input onChangeText={(text) => setSearch(text)} placeholder="Search" />
+    </Item>
+  </Header>
+);
 
 export default SearchBar;

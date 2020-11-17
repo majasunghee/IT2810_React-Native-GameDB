@@ -1,14 +1,29 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  NativeTouchEvent,
+  NativeSyntheticEvent,
+} from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
 import Modal from "./src/components/Modal";
-import {Container, Content, List, ListItem, Picker, Icon, Left, Right } from "native-base";
+import {
+  Container,
+  Content,
+  List,
+  ListItem,
+  Picker,
+  Icon,
+  Left,
+  Right,
+} from "native-base";
 import SearchBar from "./src/components/SearchBar";
 import Pagination from "./src/components/Pagination";
 import * as Font from "expo-font";
-import ListRender from './src/components/ListRender';
-import FilterPicker from './src/components/FilterPicker';
+import ListRender from "./src/components/ListRender";
+import FilterPicker from "./src/components/FilterPicker";
 
 interface IGame {
   name: string;
@@ -37,7 +52,7 @@ const App: React.FC<IGame> = () => {
   //state used in searching
   const [search, setSearch] = useState<string>("");
 
-  const [filter, setFilter] = useState<string>('none');
+  const [filter, setFilter] = useState<string>("none");
 
   // native base uses fonts that need to be loaded async
   useEffect(() => {
@@ -52,7 +67,6 @@ const App: React.FC<IGame> = () => {
   const [index, setIndex] = useState();
 
   const initialRender = useRef(true);
-
 
   const fetchGames = () => {
     let requestBody = {
@@ -109,9 +123,9 @@ const App: React.FC<IGame> = () => {
   console.log(search);
 
   useEffect(() => {
-    if(initialRender.current) {
+    if (initialRender.current) {
       initialRender.current = false;
-  } else {
+    } else {
       setPageNum(1);
       setPrevBtnDisabled(true);
       checkIfNextBtnDisabled();
@@ -120,14 +134,15 @@ const App: React.FC<IGame> = () => {
 
   //used to keep track of the game element that
   //has been clicked
-  const handleClick = (index) => {
+  const handleClick = (index: any) => {
+    console.log(index + "helooo");
     setIndex(index);
     setDetails(games[index]);
     setShow(true);
   };
 
   //closes the modal
-  const closeModal = () => {
+  const closeModal = (e: any) => {
     setShow(false);
   };
 
@@ -135,15 +150,14 @@ const App: React.FC<IGame> = () => {
   //The next button is clickable as long as there are game elements in pageResults
   function nextButton() {
     if (pageResults > 6) {
-      setNextBtnDisabled(false); 
+      setNextBtnDisabled(false);
       setPageNum(pageNum + 1);
       setPrevBtnDisabled(false);
     }
     if (pageResults < 12) {
-      setNextBtnDisabled(true); 
+      setNextBtnDisabled(true);
     }
   }
-
 
   //Previous button is disabled if on the first page
   //Next button is enabled
@@ -162,7 +176,7 @@ const App: React.FC<IGame> = () => {
     setFilter(value);
   }
 
-  function checkIfNextBtnDisabled () {
+  function checkIfNextBtnDisabled() {
     if (pageResults > 6) {
       setNextBtnDisabled(false);
     }
@@ -174,8 +188,6 @@ const App: React.FC<IGame> = () => {
   console.log("Games objects = " + pageResults);
   console.log("Page number is =" + pageNum);
   console.log(nextBtnDisabled);
-
-
 
   //console.log(pageNum); // console.log("Pageresults = " +pageResults); // console.log("pageNum" + pageNum);
   const styles = StyleSheet.create({
@@ -197,25 +209,34 @@ const App: React.FC<IGame> = () => {
       <StatusBar style="auto" />
       <NavBar />
       <SearchBar setSearch={setSearch} />
-      <FilterPicker  filter={filter} updateChange={updateChange} />
+      <FilterPicker filter={filter} updateChange={updateChange} />
       <Content>
         <View style={show ? { opacity: 0.3 } : null}>
           <List style={{ backgroundColor: "#DBDADA" }}>
-            {filter=='none' ?
-            games.slice(0, 6).map((game, index) => {
-              return (
-                <ListRender game={game} index={index} handleClick={handleClick}/>
-              );
-            }) : 
-            games.filter((e)=> {
-              return e.esrb == filter
-            }).slice(0, 6)
-              .map((game, index)=>{
-                return (
-                  <ListRender game={game} index={index} handleClick={handleClick}/> 
-                ); 
-            })}
-
+            {filter == "none"
+              ? games.slice(0, 6).map((game, index) => {
+                  return (
+                    <ListRender
+                      game={game}
+                      index={index}
+                      handleClick={handleClick.bind(this, index)}
+                    />
+                  );
+                })
+              : games
+                  .filter((e) => {
+                    return e.esrb == filter;
+                  })
+                  .slice(0, 6)
+                  .map((game, index) => {
+                    return (
+                      <ListRender
+                        game={game}
+                        index={index}
+                        handleClick={handleClick.bind(this, index)}
+                      />
+                    );
+                  })}
           </List>
         </View>
       </Content>
