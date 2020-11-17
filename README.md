@@ -15,7 +15,7 @@ Dersom QR koden ikke fungerer, må du bytte connection i Expo klienten i nettles
 ## Krav til applikasjonens innhold og funksjonalitet
 
 ### Søkegrensesnitt
-Søkegrensesnittet har blitt delvis gjenbrukt fra prosjekt 3. Søkekomponenten består av en ikon- og en inputkomponent som endrer søkeord-staten når en bokstav blir tastet inn. I prosjekt 3 ble dette løst ved å ha en form-komponent med en formcontrol som lagret inputen i en ref, og ref-en endret staten når "submit"-knappen ble trykket på. I React Native bruker søkekomponenten native-base komponenter som er et komponentbibliotek for rect-native. 
+Søkegrensesnittet har blitt delvis gjenbrukt fra prosjekt 3. Søkekomponenten består av en ikon- og en inputkomponent som endrer søkeord-staten når en bokstav blir tastet inn. I prosjekt 3 ble dette løst ved å ha en form-komponent med en formcontrol som lagret inputen i en ref, og ref-en endret staten når "submit"-knappen ble trykket på. I React Native bruker søkekomponenten en input-komponent som oppdaterer søkeord-staten hver gang en bokstav skrives eller viskes fra søkebaren.
 
 Selve implementasjonen av søk er den samme som brukt prosjekt 3. Når staten endres med et nytt søkeord, vil fetchen rendres og hente spillene som matcher tittelen som blir søkt på.
 
