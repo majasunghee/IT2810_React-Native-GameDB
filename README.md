@@ -58,15 +58,15 @@ Til dette prosjektet har vi gjennomført manuell end-to-end testing i henhold ti
 
 **Testoppgaver**
 1. Åpne applikasjonen.
-2. Trykk på et spillene på fremsiden for å få opp en modal med flere detaljer om spillet.
+2. Trykk på ett av spillene på fremsiden for å få opp en modal med flere detaljer om spillet.
 3. Test søkefelt og paginering.
      1. Søk på "Mario" 
           - Resultat: Alle 6 spillene med "Mario" i tittelen blir vist. 
           - Previous og next knappene blir grået ut og disabled siden det ikke finnes flere elementer å bla mellom.
      2. Søk på "En".
           - Resultat: Alle spill med "En" i tittlen blir vist.
-          - Bruk previous og next knappene for å teste ut paginering (dette kan gjøres fra andre sider og, men ved å søke på "En" får du en passe stor liste med objekt. Dersom du paginerer fra fremsiden må du gjennom ganske mange sider før du kan se hvordan siste side ser ut).
-5. Test filtreingsfunksjon
+          - Bruk previous og next knappene for å teste ut paginering (dette kan gjøres fra andre sider og, men ved å søke på "En" får du en passe stor liste med objekter. Dersom du paginerer fra fremsiden må du gjennom ganske mange sider før du kan se hvordan siste side ser ut).
+5. Test filtreringsfunksjon
     1. Velg filter
           - Resultat: Listen med spill endres avhengig av filteret
     2. Clear filter
@@ -85,12 +85,9 @@ Til slutt testet vi filtreringsfunksjonen. Her byttet vi mellom ulike filtrering
 
 **Testing på iOS-enhet**
 
-I tillegg har gruppen også testet på en Iphone med 6" skjrmstørrelse for å sjekke at applikasjonen også fungerer fint på en mobil med iOS opperativsystem. 
-Alle fem testoppgavene ble gjennomført og all funksjonalitet i applikasjonen fungerte som forventet. Resultatet av testene ble med andre ord likt som for testene utført på Android som beskrevet over.
+I tillegg til å teste på Android enheter, har gruppen testet på en Iphone med 6" skjermstørrelse for å sjekke at applikasjonen også fungerer fint på en mobil med iOS opperativsystem. Alle fem testoppgavene ble gjennomført, og all funksjonalitet i applikasjonen fungerte som forventet. Resultatet av testene ble med andre ord likt som for testene utført på Android, som beskrevet over.
 
-Designet på appen litt annerledes på iOS enn på Android. Dette gjelder da i hovedsak søkefeltet og filtreringen
-som har et litt mindre "fint" design på iOS. Likevel er begge funksjonalitetene fullt mulig å bruke uten problemer, så dette er ikke noe gruppen 
-ser på som et problem. Det er derfor heller ikke gjort noen endringer for å tilpasse designet.
+Ett avvik er at designet på appen er litt annerledes på iOS enn på Android. Dette gjelder da i hovedsak søkefeltet og filtreringen, som har et litt mindre "fint" design på iOS. Grunnen til at designet ser litt annerledes ut på iOS, kommer av at vi ikke har hatt muligheten til å utvikle kontinuerlig for iOS enheter på samme måte som vi har kunnet gjort for Android enheter. Likevel er begge funksjonalitetene fullt mulig å bruke uten problemer, så dette er ikke noe gruppen ser på som et problem. Det er derfor heller ikke gjort noen endringer for å tilpasse designet i etterkant av testingen.
 
 
 
