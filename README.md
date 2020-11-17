@@ -29,7 +29,7 @@ Når man trykker på et av spillene i søkeresultatet kommer det opp en modal so
 Vi har likevel valgt å gjøre en del endringer på designet til modalen for å tilpasse visningen til en mobilskjerm. I tillegg har vi også valgt å legge modalen i en egen komponent for å gjøre koden litt mer oversiktlig.
 
 ### Filtrering
-Filtreringen rakk vi ikke å implementere i prosjekt 3, den er dermed et nytt funksjonalitet. Vi bestemte oss for å filtrere på spillets PEGI rating, dvs aldersgrensen. Dette ble gjort ved å ha en filter-state som inneholder en PEGI-rating streng. Deretter vil en lambda funksjon sjekke om filteren har blitt satt til noe annet en "none". Hvis det er tilfelle, vil lamdas else-delen først filtrere bort alle spill som har en annen PEGI-rating enn den ønskede, for å deretter utføre de samme endringer en ikke filtrert liste vil gjøre: hente ut de seks første elementer i lista med .slice(0.6) og til slutt mappe gjennom elementene og sette de inn i en Liste-komponent med Tekst-komponenter som viser spillinformasjonen.
+Filtreringen rakk vi ikke å implementere i prosjekt 3. Dette er dermed ny funksjonalitet. Vi bestemte oss for å filtrere på spillets PEGI rating, dvs aldersgrensen. Dette ble gjort ved å ha en filter-state som inneholder en PEGI-rating streng. Deretter vil en lambda funksjon sjekke om filteret har blitt satt til noe annet enn "none". Hvis dette er tilfellet, vil lamdas else-delen først filtrere bort alle spill som har en annen PEGI-rating enn den ønskede, for å deretter utføre de samme endringer en ikke filtrert liste vil gjøre: hente ut de seks første elementer i lista med .slice(0.6) og til slutt mappe gjennom elementene og sette de inn i en Liste-komponent med Tekst-komponenter som viser spillinformasjonen.
 
 Siden filtrering gjøres fra frontend og pagineringen skjer på backend, vil pagineringen på en filtrert liste ikke funke som det er tiltenkt. Ved paginering i en filtrert liste, vil ikke den riktige rekkefølgen på elementene vises. Dette skjer fordi .skip(), som er funskjonen pagineringen bruker, hopper over x-antall objekter i databasen og tar ikke hensyn til den filtrerte lista som ligger på frontend.
 
@@ -47,7 +47,7 @@ Ettersom CSS ikke er støttet i React Native har vi brukt StyleSheet-objekter fo
 
 
 ### Tredjepartskomponenter
-I dette prosjektet brukes Native Base. Native Base er et UI-bibliotek for React Native, som gjør det enkelt å implementere vanlige mobilapplikasjonsfunksjonaliteter. Vi har blandt annet brukt Native Base til:
+I dette prosjektet brukes Native Base. Native Base er et UI-bibliotek for React Native som gjør det enkelt å implementere vanlige mobilapplikasjonsfunksjonaliteter. Vi har blandt annet brukt Native Base til:
 * Et kryss-ikon for å lukke modalen.
 * Listevisningen av spillene som blir hentet, ved å bruke List og ListItem komponenetene.
 * En drop-down meny med filtreringsmuligheter, ved hjelp av en Picker-komponent.
@@ -85,5 +85,5 @@ Til slutt testet vi filtreringsfunksjonen. Her byttet vi mellom ulike filtrering
 
 **Testing på iOS-enhet**
 
-![image](/uploads/2ff9bda46afbfb6bad30f604471f7de3/image.png)
+![image](/uploads/13a237ef7b88004f4abc3e751779ea60/image.png)
 
