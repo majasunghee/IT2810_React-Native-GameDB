@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
 import Modal from "./src/components/Modal";
@@ -26,28 +26,38 @@ interface IGame {
 
 const App: React.FC<IGame> = () => {
   const [games, setGames] = useState<IGame[]>([]);
-  const [pageNum, setPageNum] = useState<number>(1);
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
-
-  //state used in searching
-  const [search, setSearch] = useState<string>("");
-
+  
+  //State used for filtering
   const [filter, setFilter] = useState<string>("none");
+
+  //States used for modal
   const [show, setShow] = useState(false);
   const [details, setDetails] = useState();
   const [index, setIndex] = useState();
 
-  const initialRender = useRef(true);
-  const pageResults: number = games.length;
+  //States used for pagination
+  const [pageNum, setPageNum] = useState<number>(1);
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
 
-  // native base uses fonts that need to be loaded async
-  useEffect(() => {
-    (async () =>
-      await Font.loadAsync({
-        Roboto: require("native-base/Fonts/Roboto.ttf"),
-      }))();
-  }, []);
+  let pageResults: number = 0;
+  if(filter!=='none'){
+    const filteredGames = games.filter((e) => {
+      return e.esrb === filter;
+    })
+    pageResults = filteredGames.length;
+  }
+  else {
+    pageResults= games.length;
+    } 
+  
+
+  //State used for searching
+  const [search, setSearch] = useState<string>(""); 
+
+  //Variable that returns a mutable ref object
+  const initialRender = useRef(true);
+
 
   const fetchGames = () => {
     let requestBody = {
@@ -94,12 +104,20 @@ const App: React.FC<IGame> = () => {
       });
   };
 
-  //rendres the fetching games function when either
-  //the searchword or pagenumber changes
+  //Native base uses fonts that need to be loaded async
+  useEffect(() => {
+    (async () =>
+      await Font.loadAsync({
+        Roboto: require("native-base/Fonts/Roboto.ttf"),
+      }))();
+  }, []);
+
+  //Renders the fetching games function when either the searchword or pagenumber changes
   useEffect(() => {
     fetchGames();
-  }, [pageNum, search]);
+  }, [pageNum, search, filter]);
 
+  //Resets the pagenumber and checks if there are more than 6 elements to page on when the searchword changes
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
@@ -108,23 +126,36 @@ const App: React.FC<IGame> = () => {
       setPrevBtnDisabled(true);
       checkIfNextBtnDisabled();
     }
-  }, [search]);
+  }, [search, filter]);
 
-  //used to keep track of the game element that
-  //has been clicked
+  //Keeps track of the game element that has been clicked
   const handleClick = (index) => {
     setIndex(index);
-    setDetails(games[index]);
+    if(filter!=='none'){
+      const filteredGames = games.filter((e) => {
+        return e.esrb === filter;
+      })
+      setDetails(filteredGames[index]);
+    }
+    else {
+      setDetails(games[index]);
+      } 
+    
     setShow(true);
   };
 
-  //closes the modal
+  //Updates the filter value when a filter is chosen
+  function updateChange(value) {
+    setFilter(value);
+  }
+
+  //Closes the modal
   const closeModal = () => {
     setShow(false);
   };
 
-  //Previous button is clickable  except when on the fist page number
-  //The next button is clickable as long as there are game elements in pageResults
+  //Next button is clickable  except when on the last page number
+  //The prev button is clickable as long as there are more than 6 elements left from the first page (we are not on the first page)
   function nextButton() {
     if (pageResults > 6) {
       setNextBtnDisabled(false);
@@ -136,8 +167,8 @@ const App: React.FC<IGame> = () => {
     }
   }
 
-  //Previous button is disabled if on the first page
-  //Next button is enabled
+  //Prev button is clickable except when on the first page
+  //Next button is always clickable after having paged backwards
   function prevButton() {
     if (pageNum > 1) {
       setPrevBtnDisabled(false);
@@ -149,11 +180,9 @@ const App: React.FC<IGame> = () => {
     }
   }
 
-  function updateChange(value) {
-    setFilter(value);
-  }
-
+  //Checks if there are more than 6 elements in the pageResults list. If not, both the prev and next button will be greyed out and disabled.
   function checkIfNextBtnDisabled() {
+    console.log(pageResults);
     if (pageResults > 6) {
       setNextBtnDisabled(false);
     }
@@ -162,19 +191,6 @@ const App: React.FC<IGame> = () => {
     }
   }
 
-  const styles = StyleSheet.create({
-    listItem: {
-      backgroundColor: "white",
-      elevation: 5,
-      margin: 6,
-      padding: 5,
-    },
-    titleText: {
-      fontWeight: "bold",
-      fontSize: 20,
-      textTransform: "uppercase",
-    },
-  });
 
   return (
     <Container>
@@ -189,6 +205,7 @@ const App: React.FC<IGame> = () => {
               ? games.slice(0, 6).map((game, index) => {
                   return (
                     <ListRender
+                      key={index}
                       game={game}
                       index={index}
                       handleClick={handleClick.bind(this, index)}
@@ -203,6 +220,7 @@ const App: React.FC<IGame> = () => {
                   .map((game, index) => {
                     return (
                       <ListRender
+                        key={index}
                         game={game}
                         index={index}
                         handleClick={handleClick.bind(this, index)}

@@ -25,7 +25,7 @@ const Modals = (props: { close: any; detail: ComponentProps }) => {
                 marginRight: 20,
                 marginTop: 2,
               }}
-              onPress={props.close} //send call to App to close the modal when clicked
+              onPress={props.close} //Send call to App to close the modal when clicked
             />
           </View>
           <View style={styles.modalViews}>

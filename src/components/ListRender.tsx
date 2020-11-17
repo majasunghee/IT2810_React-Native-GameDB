@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Text, ListItem } from "native-base";
+import { Text } from "react-native";
+import { ListItem } from "native-base";
+import styles from '../styles/ListRenderStyles';
 
 type ComponentProps = {
   name: String;
@@ -16,6 +17,7 @@ const ListRender = (props: {
   game: ComponentProps;
   index: number;
 }) => (
+  //Adds each mapped item on games to a ListItem component
   <ListItem
     noIndent
     style={styles.listItem}
@@ -25,30 +27,16 @@ const ListRender = (props: {
     <Text style={{ lineHeight: 26 }}>
       <Text style={styles.titleText}>{props.game.name}</Text>
       {"\n"}
-      <Text style={{ fontWeight: "bold" }}>Price:</Text>
+      <Text style={styles.text}>Price:</Text>
       {" " + props.game.msrp + " $"}
       {"\n"}
-      <Text style={{ fontWeight: "bold" }}>By:</Text>
+      <Text style={styles.text}>By:</Text>
       {" " + props.game.developer}
       {"\n"}
-      <Text style={{ fontWeight: "bold" }}>Publisher:</Text>
+      <Text style={styles.text}>Publisher:</Text>
       {" " + props.game.publisher}
     </Text>
   </ListItem>
 );
-
-const styles = StyleSheet.create({
-  titleText: {
-    fontWeight: "bold",
-    fontSize: 20,
-    textTransform: "uppercase",
-  },
-  listItem: {
-    backgroundColor: "white",
-    elevation: 5,
-    margin: 6,
-    padding: 5,
-  },
-});
 
 export default ListRender;
