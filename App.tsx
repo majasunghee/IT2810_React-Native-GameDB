@@ -1,24 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  NativeTouchEvent,
-  NativeSyntheticEvent,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./src/components/Navbar";
 import Modal from "./src/components/Modal";
-import {
-  Container,
-  Content,
-  List,
-  ListItem,
-  Picker,
-  Icon,
-  Left,
-  Right,
-} from "native-base";
+import { Container, Content, List } from "native-base";
 import SearchBar from "./src/components/SearchBar";
 import Pagination from "./src/components/Pagination";
 import * as Font from "expo-font";
@@ -41,18 +26,20 @@ interface IGame {
 
 const App: React.FC<IGame> = () => {
   const [games, setGames] = useState<IGame[]>([]);
-  const [price, setPrice] = useState<string>("");
-
   const [pageNum, setPageNum] = useState<number>(1);
-
   const [prevBtnDisabled, setPrevBtnDisabled] = useState<boolean>(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState<boolean>(false);
-  const pageResults: number = games.length;
 
   //state used in searching
   const [search, setSearch] = useState<string>("");
 
   const [filter, setFilter] = useState<string>("none");
+  const [show, setShow] = useState(false);
+  const [details, setDetails] = useState();
+  const [index, setIndex] = useState();
+
+  const initialRender = useRef(true);
+  const pageResults: number = games.length;
 
   // native base uses fonts that need to be loaded async
   useEffect(() => {
@@ -61,12 +48,6 @@ const App: React.FC<IGame> = () => {
         Roboto: require("native-base/Fonts/Roboto.ttf"),
       }))();
   }, []);
-
-  const [show, setShow] = useState(false);
-  const [details, setDetails] = useState();
-  const [index, setIndex] = useState();
-
-  const initialRender = useRef(true);
 
   const fetchGames = () => {
     let requestBody = {
@@ -118,9 +99,6 @@ const App: React.FC<IGame> = () => {
   useEffect(() => {
     fetchGames();
   }, [pageNum, search]);
-  console.log(filter);
-  console.log(pageResults);
-  console.log(search);
 
   useEffect(() => {
     if (initialRender.current) {
@@ -134,15 +112,14 @@ const App: React.FC<IGame> = () => {
 
   //used to keep track of the game element that
   //has been clicked
-  const handleClick = (index: any) => {
-    console.log(index + "helooo");
+  const handleClick = (index) => {
     setIndex(index);
     setDetails(games[index]);
     setShow(true);
   };
 
   //closes the modal
-  const closeModal = (e: any) => {
+  const closeModal = () => {
     setShow(false);
   };
 
@@ -185,11 +162,6 @@ const App: React.FC<IGame> = () => {
     }
   }
 
-  console.log("Games objects = " + pageResults);
-  console.log("Page number is =" + pageNum);
-  console.log(nextBtnDisabled);
-
-  //console.log(pageNum); // console.log("Pageresults = " +pageResults); // console.log("pageNum" + pageNum);
   const styles = StyleSheet.create({
     listItem: {
       backgroundColor: "white",
